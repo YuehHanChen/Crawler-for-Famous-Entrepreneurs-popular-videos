@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     finally:
         print("今天看這個", the_one)
-        # driver.quit()
-    #     soup = BeautifulSoup(driver.page_source, 'html5lib')
-        # title = soup.find("yt-formatted-string", "style-scope ytd-video-primary-info-renderer").text.strip()
-        # print("Now Playing：", title)
+        driver.quit()
+        soup = BeautifulSoup(driver.page_source, 'html5lib')
+        title = soup.find("yt-formatted-string", "style-scope ytd-video-primary-info-renderer").text.strip()
+        print("Now Playing：", title)
