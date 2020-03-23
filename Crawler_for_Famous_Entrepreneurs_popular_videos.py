@@ -23,7 +23,7 @@ if __name__ == '__main__':
                 "https://www.youtube.com/results?search_query=paul+graham","https://www.youtube.com/results?search_query=Vinod+Khosla",
                 "https://www.youtube.com/results?search_query=brian+armstrong", "https://www.youtube.com/results?search_query=patrick+collison+","https://www.youtube.com/results?search_query=boyan+slat"
                 ]
-    #去爬取這一頁資料，選出觀看次數最多的前3個，在隨機抽出一個
+    #crawl these page and find the top 3 views and then randomly choose one to open
 
 
     try:
