@@ -27,14 +27,12 @@ if __name__ == '__main__':
 
 
     try:
-        # 啟動Webdriver
+        # activate Webdriver
         driver = webdriver.Chrome(executable_path='chromedriver')
-        # Webdriver 的執行檔也可以使用 PhantomJS
-        # driver = webdriver.PhantomJS('phantomjs.exe')
-        driver.maximize_window()  # 打開瀏覽器之後把視窗放最大
-        driver.set_page_load_timeout(60)  # 等待時間最多是60秒，讓他去下載網址資訊
+        driver.maximize_window()  # open the browser and maximize it
+        driver.set_page_load_timeout(60)  # wait for 60s, which is safe
         url = random.choice(url_list)
-        driver.get(url)  # 使用get去前往該網頁
+        driver.get(url)  # go to the url
         time.sleep(30)
 
         split1 = url.split("=")
@@ -45,15 +43,15 @@ if __name__ == '__main__':
         all_videos = soup.find_all("ytd-video-renderer", "style-scope ytd-item-section-renderer")
         video_dict = {}
         for video in all_videos:
-            view_num1 = video.find("span", "style-scope ytd-video-meta-block").text.replace("觀看次數：","")
+            view_num1 = video.find("span", "style-scope ytd-video-meta-block").text.replace("觀看次數：","") # "觀看次數" means "views" in Mandarin
             if "萬" in list(view_num1):
                 if "." in list(view_num1):
                     view_num2 = view_num1.replace(".","")
-                    Real_num = view_num2.replace("萬次", "") + "000"
+                    Real_num = view_num2.replace("萬次", "") + "000" # "萬次" means "10000 times" in Mandarin
                 else:
                     Real_num = view_num1.replace("萬次","") + "0000"
             else:
-                Real_num = view_num1.replace("次", "")
+                Real_num = view_num1.replace("次", "") #"次"means "times" in Mandarin
             video_dict[Real_num] = "https://www.youtube.com/"+video.a["href"]
 
         new_list = []
@@ -74,9 +72,9 @@ if __name__ == '__main__':
 
         the_one = video_dict[str(random.choice(Top_3_video_list))]
 
-        #print("今天看這個", the_one)
+        #print("Watch this: ", the_one)
 
-        driver.get(the_one)  # 使用get去前往該網頁
+        driver.get(the_one)  
         time.sleep(8)
 
         try:
@@ -89,7 +87,7 @@ if __name__ == '__main__':
 
 
     finally:
-        print("今天看這個", the_one)
+        print("Watch this: ", the_one)
         driver.quit()
         soup = BeautifulSoup(driver.page_source, 'html5lib')
         title = soup.find("yt-formatted-string", "style-scope ytd-video-primary-info-renderer").text.strip()
